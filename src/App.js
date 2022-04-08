@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Login from "./Login";
+import User from "./User";
+import Admin from "./Admin";
+import Error from "./Error";
+import "./App.css";
+import HeaderAdmin from "./admin/HeaderAdmin";
+import LeftMenuAdmin from "./admin/LeftMenuAdmin";
+
+import HeaderUser from "./user/HeaderUser";
+import LeftMenuUser from "./user/LeftMenuUser";
+
+import Profile from "./user/Profile";
+import MovieUser from "./user/MoviesUser";
+
+import UserAdmin from "./admin/UserAdmin";
+import AdminMovie from "./admin/MoviesAdmin";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="user" element={<User />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="movieuser" element={<MovieUser />} />
+        </Route>
+        <Route path="admin" element={<Admin />}>
+          <Route path="profile" element={<UserAdmin />} />
+          <Route path="movieuser" element={<AdminMovie />} />
+        </Route>
+
+        <Route path="hader" element={<HeaderAdmin />} />
+        <Route path="leftmenuuser" element={<LeftMenuUser />} />
+
+        <Route path="leftmenuadmin" element={<LeftMenuAdmin />} />
+        <Route path="headeruser" element={<HeaderUser />} />
+
+        <Route path="*" element={<Error></Error>}></Route>
+      </Routes>
+    </>
   );
 }
 
