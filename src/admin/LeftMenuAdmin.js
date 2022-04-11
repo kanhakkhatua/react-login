@@ -8,7 +8,6 @@ const LeftMenu = () => {
         <div className="row flex-nowrap">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-secondary">
             <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-              <Link to="./profile">Users</Link>
               <Link to="./movieuser">Movies</Link>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function HeaderUser() {
   const navigate = useNavigate();
   var HandleLogout = () => {
+    localStorage.removeItem("LogedinData");
     navigate("/");
   };
 

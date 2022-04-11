@@ -79,6 +79,7 @@ function Login() {
       );
 
       if (filterUser.length === 1) {
+        localStorage.setItem("LogedinData", JSON.stringify(regValue.usertype));
         navigate("/user");
       } else {
         alert("User Not Found ... Please Register !");
@@ -91,6 +92,7 @@ function Login() {
       );
 
       if (filterAdmin.length === 1) {
+        localStorage.setItem("LogedinData", JSON.stringify(regValue.usertype));
         navigate("/admin");
       } else {
         alert("Admin Not Found ... Please Register !");
