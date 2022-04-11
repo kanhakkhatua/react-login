@@ -3,8 +3,7 @@ import Login from "./Login";
 import Error from "./Error";
 import "./App.css";
 
-import UserLayout from "./UserLayout";
-import AdminLayout from "./AdminLayout";
+import Layout from "./Layout";
 
 import Profile from "./user/Profile";
 import MovieUser from "./user/MoviesUser";
@@ -20,17 +19,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        <Route element={<ProtectedRoute />}>
+        {/* <Route element={<ProtectedRoute />}>
           <Route path="user" element={<UserLayout />}>
             <Route index element={<Profile />} />
             <Route path="movieuser" element={<MovieUser />} />
           </Route>
-        </Route>
+        </Route> */}
 
         <Route element={<ProtectedRoute />}>
-          <Route path="admin" element={<AdminLayout />}>
-            <Route index element={<UserAdmin />} />
-            <Route path="movieuser" element={<AdminMovie />} />
+          <Route element={<Layout />}>
+            <Route path="admin" element={<UserAdmin />} />
+            <Route path="movieadmin" element={<AdminMovie />} />
+
+            <Route path="user" element={<Profile />} />
+            <Route path="movieuser" element={<MovieUser />} />
           </Route>
         </Route>
 

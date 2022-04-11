@@ -3,9 +3,30 @@ import React from "react";
 import HeaderAdmin from "./admin/HeaderAdmin";
 import LeftMenuAdmin from "./admin/LeftMenuAdmin";
 
+import Profile from "./user/Profile";
+import UserAdmin from "./admin/UserAdmin";
+
 import { Outlet } from "react-router-dom";
 
 function Admin() {
+  const LogedinData = JSON.parse(localStorage.getItem("LogedinData"));
+
+  const getLoginData = () => {
+    if ("user" === LogedinData) {
+      return (
+        <>
+          <Outlet />
+        </>
+      );
+    } else if ("admin" === LogedinData) {
+      return (
+        <>
+          <Outlet />
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <HeaderAdmin />
@@ -17,9 +38,7 @@ function Admin() {
               <LeftMenuAdmin />
             </div>
           </div>
-          <div>
-            <Outlet />
-          </div>
+          <div>{getLoginData()}</div>
         </div>
       </div>
     </>
