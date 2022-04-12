@@ -1,20 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const LeftMenu = () => {
+import Header from "./Header";
+import LeftMenu from "./LeftMenu";
+
+import { Outlet } from "react-router-dom";
+
+function Admin() {
+  const LogedinData = JSON.parse(localStorage.getItem("LogedinData"));
+
   const getLoginData = () => {
-    const LogedinData = JSON.parse(localStorage.getItem("LogedinData"));
-
-    if (LogedinData == "user") {
+    if ("user" === LogedinData) {
       return (
         <>
-          <Link to="./movieuser">Movie</Link>
+          <Outlet />
         </>
       );
-    } else {
+    } else if ("admin" === LogedinData) {
       return (
         <>
-          <Link to="./movieadmin">Movies</Link>
+          <Outlet />
         </>
       );
     }
@@ -22,17 +26,20 @@ const LeftMenu = () => {
 
   return (
     <>
+      <Header />
+
       <div className="container-fluid">
         <div className="row flex-nowrap">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-secondary">
             <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-              {getLoginData()}
+              <LeftMenu />
             </div>
           </div>
+          <div>{getLoginData()}</div>
         </div>
       </div>
     </>
   );
-};
+}
 
-export default LeftMenu;
+export default Admin;

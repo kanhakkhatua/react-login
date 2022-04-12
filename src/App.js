@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "./Login";
-import Error from "./Error";
+import Login from "./components/Login";
+import Error from "./components/Error";
 import "./App.css";
 
-import Layout from "./Layout";
+import Layout from "./components/Layout";
 
-import Profile from "./user/Profile";
-import MovieUser from "./user/MoviesUser";
+import Profile from "./components/user/Profile";
+import MovieUser from "./components/user/MoviesUser";
 
-import UserAdmin from "./admin/UserAdmin";
-import AdminMovie from "./admin/MoviesAdmin";
+import UserAdmin from "./components/admin/UserAdmin";
+import AdminMovie from "./components/admin/MoviesAdmin";
 
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -19,22 +19,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        {/* <Route element={<ProtectedRoute />}>
-          <Route path="user" element={<UserLayout />}>
-            <Route index element={<Profile />} />
-            <Route path="movieuser" element={<MovieUser />} />
-          </Route>
-        </Route> */}
+        {/* <Route element={<ProtectedRoute />}> */}
+        <Route element={<Layout />}>
+          <Route path="admin" element={<UserAdmin />} />
+          <Route path="movieadmin" element={<AdminMovie />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route path="admin" element={<UserAdmin />} />
-            <Route path="movieadmin" element={<AdminMovie />} />
-
-            <Route path="user" element={<Profile />} />
-            <Route path="movieuser" element={<MovieUser />} />
-          </Route>
+          <Route path="user" element={<Profile />} />
+          <Route path="movieuser" element={<MovieUser />} />
         </Route>
+        {/* </Route> */}
 
         <Route path="*" element={<Error></Error>}></Route>
       </Routes>
