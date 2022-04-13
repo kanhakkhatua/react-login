@@ -3,15 +3,19 @@ import { Link } from "react-router-dom";
 
 const LeftMenu = () => {
   const getLoginData = () => {
-    const LogedinData = JSON.parse(localStorage.getItem("LogedinData"));
+    // console.log("get login data");
+    const token = JSON.parse(localStorage.getItem("token"));
+    // console.log(token.usertype);
 
-    if (LogedinData === "user") {
+    if (token.usertype === "user") {
+      // console.log("user");
       return (
         <>
           <Link to="./movieuser">Movie</Link>
         </>
       );
     } else {
+      // console.log("admin");
       return (
         <>
           <Link to="./movieadmin">Movies</Link>

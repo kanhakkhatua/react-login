@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Login() {
   const navigate = useNavigate();
@@ -74,51 +75,53 @@ function Login() {
   };
 
   var LoginUser = () => {
-    // console.log("LOgin");
-    // console.log(userType);
-
     if ("user" === userType) {
-      console.log(" user login");
-      console.log(loginValue);
-
       axios
         .post("http://172.16.15.9:5000/api/user/login", loginValue)
         .then((res) => {
-          console.log(res.data);
           if (res.data.success === true) {
-            // console.log("hello user");
+            localStorage.setItem(
+              "token",
+              JSON.stringify({
+                token: res.data.token,
+                usertype: userType,
+              })
+            );
+
             navigate("/user");
           }
         })
-        .catch((err) => alert(err));
-
-      // var filterUser = userData.filter(
-      //   (e) =>
-      //     loginValue.loginemale === e.email &&
-      //     loginValue.loginpassword === e.password
-      // );
-
-      // if (filterUser.length === 1) {
-      //   localStorage.setItem("LogedinData", JSON.stringify(regValue.usertype));
-      //   navigate("/user");
-      // } else {
-      //   alert("User Not Found ... Please Register !");
-      // }
+        .catch((err) =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "User Not Found ... Please Register !",
+            footer: err,
+          })
+        );
     } else {
-      console.log("admin login");
-
-      //   var filterAdmin = adminData.filter(
-      //     (e) =>
-      //       loginValue.loginemale === e.email &&
-      //       loginValue.loginpassword === e.password
-      //   );
-
-      //   if (filterAdmin.length === 1) {
-      //     localStorage.setItem("LogedinData", JSON.stringify(regValue.usertype));
-      //     navigate("/admin");
-      //   } else {
-      //     alert("Admin Not Found ... Please Register !");
-      //   }
+      axios
+        .post("http://172.16.15.9:5000/api/admin/login", loginValue)
+        .then((res) => {
+          if (res.status === 200) {
+            localStorage.setItem(
+              "token",
+              JSON.stringify({
+                token: res.data.token,
+                usertype: userType,
+              })
+            );
+            navigate("/admin");
+          }
+        })
+        .catch((err) =>
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Admin Not Found ... Please Register !",
+            footer: err,
+          })
+        );
     }
   };
 
@@ -178,7 +181,7 @@ function Login() {
           <div>
             <span>Password: </span>
             <input
-              type="text"
+              type="password"
               name="password"
               placeholder="Enter Your Password"
               onChange={changeHandlerLogin}
@@ -237,7 +240,7 @@ function Login() {
                   <div>
                     <span>Email: </span>
                     <input
-                      type="text"
+                      type="email"
                       name="email"
                       id="regEmail"
                       onChange={changeHandler}
@@ -264,7 +267,7 @@ function Login() {
                   <div>
                     <span>Phone: </span>
                     <input
-                      type="text"
+                      type="number"
                       name="phone"
                       id="regPhone"
                       onChange={changeHandler}
@@ -331,7 +334,7 @@ function Login() {
                   <div>
                     <span>Email: </span>
                     <input
-                      type="text"
+                      type="email"
                       name="email"
                       id="regEmail"
                       onChange={changeHandlerAdmin}

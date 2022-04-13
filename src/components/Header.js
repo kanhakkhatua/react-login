@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const HeaderAdmin = () => {
   const navigate = useNavigate();
   var HandleLogoutAdmin = () => {
-    localStorage.removeItem("LogedinData");
+    localStorage.removeItem("token");
     navigate("/");
   };
   return (

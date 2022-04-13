@@ -2,9 +2,9 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const userAuth = () => {
-  const LogedinData = JSON.parse(localStorage.getItem("LogedinData"));
+  const token = JSON.parse(localStorage.getItem("token"));
   //   console.log(LogedinData);
-  if (LogedinData) {
+  if (token) {
     return true;
   } else {
     return false;

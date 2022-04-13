@@ -6,16 +6,16 @@ import LeftMenu from "./LeftMenu";
 import { Outlet } from "react-router-dom";
 
 function Admin() {
-  const LogedinData = JSON.parse(localStorage.getItem("LogedinData"));
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const getLoginData = () => {
-    if ("user" === LogedinData) {
+    if (token.usertype === "user") {
       return (
         <>
           <Outlet />
         </>
       );
-    } else if ("admin" === LogedinData) {
+    } else {
       return (
         <>
           <Outlet />

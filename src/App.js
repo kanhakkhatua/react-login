@@ -19,15 +19,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        {/* <Route element={<ProtectedRoute />}> */}
-        <Route element={<Layout />}>
-          <Route path="admin" element={<UserAdmin />} />
-          <Route path="movieadmin" element={<AdminMovie />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="admin" element={<UserAdmin />} />
+            <Route path="movieadmin" element={<AdminMovie />} />
 
-          <Route path="user" element={<Profile />} />
-          <Route path="movieuser" element={<MovieUser />} />
+            <Route path="user" element={<Profile />} />
+            <Route path="movieuser" element={<MovieUser />} />
+          </Route>
         </Route>
-        {/* </Route> */}
 
         <Route path="*" element={<Error></Error>}></Route>
       </Routes>
